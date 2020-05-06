@@ -1,0 +1,29 @@
+sudo: false
+dist: bionic
+
+jdk:
+  - openjdk8
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    
+addons:
+  apt:
+    update: true
+
+env:
+  global:
+    - PATH=$PATH:$HOME/.local/bin
+
+before_install: true
+## We want
+## 1) build and execute tests for develop pushes, push but mark them as testing on Docker-Hub ( every git push will override the previous Docker-Hub image )
+## 2) build and execute tests for master pushes but, DO NOT PUSH them on Docker-Hub
+## 3) build and execute tests for git tags, push and mark them as latest on Docker-Hub
+script: true
+
+notifications: true
